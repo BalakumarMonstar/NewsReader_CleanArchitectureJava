@@ -97,7 +97,8 @@ public class MainActivity extends AppCompatActivity implements NewsAdapter.OnIte
 
     @Override
     public void onItemClick(Article article) {
-
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(article.getUrl()));
+        startActivity(intent);
     }
 }
 
