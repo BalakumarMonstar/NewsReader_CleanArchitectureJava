@@ -7,9 +7,9 @@ import java.util.Locale;
 
 public class DateTimeUtil {
 
+    public static String inputPattern = "yyyy-MM-dd'T'HH:mm:ss'Z'";
     public static String parseEventDate(String time) {
         String outputPattern = "dd MMM yyyy hh:mm:ss a";
-        String inputPattern = "yyyy-MM-dd'T'HH:mm:ss'Z'";
         SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern, Locale.getDefault());
         SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern, Locale.getDefault());
         Date date;

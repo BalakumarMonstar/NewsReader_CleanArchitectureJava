@@ -14,9 +14,14 @@ import com.bala.newsreadercleanarchitecture.data.repository.NewsRepositoryImpl;
 import com.bala.newsreadercleanarchitecture.domain.model.Article;
 import com.bala.newsreadercleanarchitecture.domain.repository.NewsRepository;
 import com.bala.newsreadercleanarchitecture.ui.NewsAdapter;
+import com.bala.newsreadercleanarchitecture.utils.DateTimeUtil;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements NewsAdapter.OnItemClickListener {
 
@@ -60,6 +65,18 @@ public class MainActivity extends AppCompatActivity implements NewsAdapter.OnIte
 
     private void loadNewsData() {
         articles = newsRepository.getNews();
+        this.articles.sort((article1, article2) -> {
+            SimpleDateFormat format = new SimpleDateFormat(DateTimeUtil.inputPattern, Locale.getDefault());
+            try {
+                Date date1 = format.parse(article1.getPublishedAt());
+                Date date2 = format.parse(article2.getPublishedAt());
+                assert date2 != null;
+                return date2.compareTo(date1); // Descending order
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return 0;
+            }
+        });
         filteredArticles.addAll(articles);
         adapter.notifyDataSetChanged();
     }
