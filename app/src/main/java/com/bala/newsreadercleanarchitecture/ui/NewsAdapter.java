@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bala.newsreadercleanarchitecture.R;
 import com.bala.newsreadercleanarchitecture.domain.model.Article;
+import com.bala.newsreadercleanarchitecture.utils.DateTimeUtil;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
@@ -57,7 +58,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
         public void bind(final Article article, final OnItemClickListener listener) {
             titleTextView.setText(article.getTitle());
-            publishedAtTextView.setText(article.getPublishedAt());
+            publishedAtTextView.setText(DateTimeUtil.parseEventDate(article.getPublishedAt()));
 
             // Load image using Glide library
             Glide.with(itemView.getContext())
